@@ -1,0 +1,9 @@
+apiVersion: projectriff.io/v1
+kind: Function
+metadata:
+  name: rest-test
+spec:
+  protocol: grpc
+  input: rest-test
+  container:
+    image: gcr.io/cf-sandbox-dsyer/rest-test:latest
