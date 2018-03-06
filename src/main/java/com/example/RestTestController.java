@@ -1,17 +1,15 @@
 package com.example;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.function.Function;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import org.springframework.stereotype.Component;
 
-@RestController
-class RestTestController {
+@Component("hello")
+class RestTestController implements Function<String, String> {
 
-    @RequestMapping(method = GET, path = "hello/{name}")
-    public String person(@PathVariable String name) {
-        return "Hello " + name + "!";
-    }
+	@Override
+	public String apply(String name) {
+		return "Hello " + name + "!";
+	}
 
 }
