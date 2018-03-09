@@ -3,7 +3,7 @@ kind: Function
 metadata:
   name: rest-test
 spec:
-  protocol: grpc
+  protocol: http
   input: rest-test
   container:
     image: gcr.io/cf-sandbox-dsyer/rest-test:latest

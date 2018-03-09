@@ -26,6 +26,12 @@ public class RestTestApplicationTests {
 	}
 
 	@Test
+	public void homeForward() throws Exception {
+		assertThat(this.rest.postForObject("/", "Rod", String.class))
+				.isEqualTo("[\"Hello Rod!\"]");
+	}
+
+	@Test
 	public void shouldNotFindGreetingElsewhere() throws Exception {
 		assertThat(this.rest.getForEntity("/hey/man", String.class).getStatusCode())
 				.isEqualTo(HttpStatus.NOT_FOUND);

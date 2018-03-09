@@ -1,5 +1,6 @@
-FROM projectriff/java-function-invoker:latest
-ARG FUNCTION_JAR=/functions/rest-test-0.1.0-SNAPSHOT.jar
-ARG FUNCTION_CLASS=hello&main=com.example.RestTestApplication
-ADD target/rest-test-0.1.0-SNAPSHOT.jar $FUNCTION_JAR
-ENV FUNCTION_URI file://${FUNCTION_JAR}?handler=${FUNCTION_CLASS}
+FROM openjdk:8-alpine
+VOLUME /tmp
+COPY target/dependency/BOOT-INF/lib /app/lib
+COPY target/dependency/META-INF /app/META-INF
+COPY target/dependency/BOOT-INF/classes /app
+ENTRYPOINT ["java","-Xmx128m","-Djava.security.egd=file:/dev/./urandom","-XX:TieredStopAtLevel=1","-noverify","-cp","app:app/lib/*","com.example.RestTestApplication"]
