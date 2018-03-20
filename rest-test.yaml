@@ -7,3 +7,11 @@ spec:
   input: rest-test
   container:
     image: dsyer/rest-test:0.0.1
+---
+
+apiVersion : projectriff.io/v1
+kind: Topic
+metadata:	
+  name: rest-test
+spec:
+  partitions: 1
