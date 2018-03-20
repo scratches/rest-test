@@ -6,4 +6,4 @@ spec:
   protocol: http
   input: rest-test
   container:
-    image: rest-test:latest
+    image: dsyer/rest-test:0.0.1
