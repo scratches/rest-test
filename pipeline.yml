@@ -1,12 +1,6 @@
 # fly --target cloud login --concourse-url https://ci.spring.io --team-name spring-cloud
 # fly --target cloud set-pipeline --config pipeline.yml --pipeline rest-test --load-vars-from credentials.yml
 ---
-resource_types:
-- name: slack-notification
-  type: docker-image
-  source:
-    repository: nebhale/slack-notification-resource
-
 resources:
 - name: source
   type: git
@@ -57,25 +51,3 @@ jobs:
   - put: build-image
     params:
       build: build
-    on_failure: *slack-failure
-    on_success: *slack-success
-
-slack-failure: &slack-failure
-  put: slack
-  params:
-    attachments:
-    - color: danger
-      fallback: "$BUILD_PIPELINE_NAME/$BUILD_JOB_NAME #$BUILD_NAME <FAILURE>"
-      text: "<!here> Build has failed"
-      title: "$BUILD_PIPELINE_NAME/$BUILD_JOB_NAME #$BUILD_NAME"
-      title_link: $ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
-
-slack-success: &slack-success
-  put: slack
-  params:
-    attachments:
-    - color: good
-      fallback: "$BUILD_PIPELINE_NAME/$BUILD_JOB_NAME #$BUILD_NAME <SUCCESS>"
-      text: "Build has succeeded"
-      title: "$BUILD_PIPELINE_NAME/$BUILD_JOB_NAME #$BUILD_NAME"
-      title_link: $ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
