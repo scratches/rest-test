@@ -13,10 +13,6 @@ resources:
     repository: gcr.io/((gcp-project))/rest-test
     username: _json_key
     password: ((gcp-key))
-- name: slack
-  type: slack-notification
-  source:
-    url: ((slack-url))
   
 jobs:
 - name: build
