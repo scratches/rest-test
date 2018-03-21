@@ -1,3 +1,5 @@
+creds.json
+credentials.yml
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
