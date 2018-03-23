@@ -9,7 +9,7 @@ class RestTestController implements Function<String, String> {
 
 	@Override
 	public String apply(String name) {
-		return "Hello " + name + "!";
+		return "Hello " + name + "!!";
 	}
 
 }
